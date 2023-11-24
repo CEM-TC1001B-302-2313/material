@@ -49,7 +49,7 @@ def crearVentanaRegistro():
                   group_id="registro notificaciones")]
         ])
     layout = [
-        [col1, col2]
+        [col1, col2],
         [sg.Button("Registrarse", key="registro button registro"),
          sg.Button("Cancelar", key="registro button cancelar")]
         ]
@@ -58,7 +58,18 @@ def crearVentanaRegistro():
                      finalize=True,
                      element_justification="center")
 
+def crearVentanaMenuPrincipal():
+    layout = [
+        [sg.Text("Menú principal")]
+        ]
+    return sg.Window("Menú principal",
+                     layout,
+                     finalize=True,
+                     element_justification="center")
+
 ventanaLogin = crearVentanaLogin()
+ventanaRegistro = None
+ventanaMenuPrincipal = None
 
 while True:
     window, event, values = sg.read_all_windows()
