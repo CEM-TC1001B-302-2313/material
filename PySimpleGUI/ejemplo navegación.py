@@ -76,3 +76,33 @@ while True:
     if event == sg.WINDOW_CLOSED:
         window.close()
         break
+    # ¿En qué ventana estamos?
+    # ¿A qué botón se le dio clic (evento)?
+    # ¿La ventana a la que nos dirigimos está cerrada (None)?
+    # ---------------------
+    # Cerrar la ventana actual
+    # Guardar el valor de None en la venta actual
+    # Ejecutar la función de la ventana a la que nos dirigimos
+    
+    # Ventana Login
+    # Login
+    elif window == ventanaLogin and \
+         event == "login button login" and \
+         ventanaMenuPrincipal is None:
+        email = values["login input email"]
+        contraseña = values["login input password"]
+        df = pd.read_csv("usuarios.csv")
+        if len(df[(df["Email"] == email)&(df["Contraseña"] == contraseña)]) >= 1:            
+            window.close()
+            ventanaLogin = None
+            ventanaMenuPrincipal = crearVentanaMenuPrincipal()
+        else:
+            sg.Popup("Error, usuario o contraseña incorrectos.",
+                     title="Error")
+    # Registro
+    elif window == ventanaLogin and \
+         event == "login button registro" and \
+         ventanaRegistro is None:
+        window.close()
+        ventanaLogin = None
+        ventanaRegistro = crearVentanaRegistro()
