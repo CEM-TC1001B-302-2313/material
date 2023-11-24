@@ -21,6 +21,43 @@ def crearVentanaLogin():
                      finalize=True,
                      element_justification="center")
 
+def crearVentanaRegistro():
+    col1 = sg.Col([
+        [sg.Text("Email")],
+        [sg.Text("Contraseña")],
+        [sg.Text("Repetir contraseña")],
+        [sg.Text("Nombre")],
+        [sg.Text("Apellido paterno")],
+        [sg.Text("Apellido materno")],
+        [sg.Text("Recibir notificaciones")]
+        ])
+    col2 = sg.Col([
+        [sg.Input(key="registro input email")],
+        [sg.Input(key="registro input password",
+                  password_char="*")],
+        [sg.Input(key="registro input repetir password",
+                  password_char="*")],
+        [sg.Input(key="registro input nombre")],
+        [sg.Input(key="registro input apellido paterno")],
+        [sg.Input(key="registro input apellido materno")],
+        [sg.Radio("Sí",
+                  key="registro radio notificaciones sí",
+                  group_id="registro notificaciones",
+                  default=True),
+         sg.Radio("No",
+                  key="registro radio notificaciones no",
+                  group_id="registro notificaciones")]
+        ])
+    layout = [
+        [col1, col2]
+        [sg.Button("Registrarse", key="registro button registro"),
+         sg.Button("Cancelar", key="registro button cancelar")]
+        ]
+    return sg.Window("Registro de usuario",
+                     layout,
+                     finalize=True,
+                     element_justification="center")
+
 ventanaLogin = crearVentanaLogin()
 
 while True:
