@@ -1,5 +1,8 @@
 import PySimpleGUI as sg
 
+sg.theme("DarkRed1")
+sg.set_options(font="Arial 18")
+
 def crearVentanaPrincipal():
     listado_oficinas = [
         "Atizapán de Zaragoza",
