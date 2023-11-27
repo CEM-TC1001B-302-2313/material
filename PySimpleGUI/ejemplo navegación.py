@@ -60,9 +60,23 @@ def crearVentanaRegistro():
                      finalize=True,
                      element_justification="center")
 
+def crearVentanaDatos():
+    df = pd.read_csv("usuarios.csv")
+    encabezados = df.columns.tolist()
+    contenido = df.head(5).values.tolist()
+    #variable = df["Columna"].estadística()
+    layout = [
+        [sg.Table(contenido, headings=encabezados)],
+        #[sg.Text(f"La estadística es: {variable}"]
+        [sg.Button("Regresar", key="datos button regresar")]
+        ]
+    return sg.Window("Ventana de datos", layout, finalize=True)
+
 def crearVentanaMenuPrincipal():
     layout = [
-        [sg.Text("Menú principal")]
+        [sg.Text("Menú principal")],
+        [sg.Button("Ventana de datos", key="principal button datos")],
+        [sg.Button("Salir", key="principal button salir")]
         ]
     return sg.Window("Menú principal",
                      layout,
@@ -71,6 +85,7 @@ def crearVentanaMenuPrincipal():
 
 ventanaLogin = crearVentanaLogin()
 ventanaRegistro = None
+ventanaDatos = None
 ventanaMenuPrincipal = None
 
 while True:
@@ -164,6 +179,31 @@ while True:
         else:
             sg.Popup("\n".join(lista_errores),
                      title="Error en el registro.")
+    
+    # Ventana Datos
+    # Regresar -> Menú principal
+    elif window == ventanaDatos and \
+         event == "datos button regresar" and \
+         ventanaMenuPrincipal is None:
+        window.close()
+        ventanaDatos = None
+        ventanaMenuPrincipal = crearVentanaMenuPrincipal()
+        
+    # Menú principal
+    # Datos -> Ventana Datos
+    elif window == ventanaMenuPrincipal and \
+         event == "principal button datos" and \
+         ventanaDatos is None:
+        window.close()
+        ventanaMenuPrincipal = None
+        ventanaDatos = crearVentanaDatos()
+    
+    elif window == ventanaMenuPrincipal and \
+         event == "principal button salir" and \
+         ventanaLogin is None:
+        window.close()
+        ventanaMenuPrincipal = None
+        ventanaLogin = crearVentanaLogin()
         
         
         
