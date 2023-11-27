@@ -1,5 +1,6 @@
 import pandas as pd
 import PySimpleGUI as sg
+import webbrowser
 
 sg.set_options(font="Arial 18")
 
@@ -76,6 +77,7 @@ def crearVentanaMenuPrincipal():
     layout = [
         [sg.Text("Menú principal")],
         [sg.Button("Ventana de datos", key="principal button datos")],
+        [sg.Button("Mapa", key="principal button mapa")],
         [sg.Button("Salir", key="principal button salir")]
         ]
     return sg.Window("Menú principal",
@@ -204,7 +206,9 @@ while True:
         window.close()
         ventanaMenuPrincipal = None
         ventanaLogin = crearVentanaLogin()
-        
+    
+    elif event == "principal button mapa":
+        webbrowser.open("https://www.google.com/maps/d/edit?mid=1nxWEbKHVMbrK32kjSae1eR1Gqqus0os&usp=sharing")
         
         
         
