@@ -87,7 +87,7 @@ while True:
     # Ejecutar la función de la ventana a la que nos dirigimos
     
     # Ventana Login
-    # Login
+    # Login -> Menú Principal
     elif window == ventanaLogin and \
          event == "login button login" and \
          ventanaMenuPrincipal is None:
@@ -102,7 +102,7 @@ while True:
         else:
             sg.Popup("Error, usuario o contraseña incorrectos.",
                      title="Error")
-    # Registro
+    # Registrarse -> Ventana Registro
     elif window == ventanaLogin and \
          event == "login button registro" and \
          ventanaRegistro is None:
@@ -110,7 +110,14 @@ while True:
         ventanaLogin = None
         ventanaRegistro = crearVentanaRegistro()
     # Ventana Registro
-    # Registrar -> Menú Principal
+    # Cancelar -> Login
+    elif window == ventanaRegistro and \
+         event == "registro button cancelar" and \
+         ventanaLogin is None:
+        window.close()
+        ventanaRegistro = None
+        ventanaLogin = crearVentanaLogin()
+    # Registrar -> Login
     elif window == ventanaRegistro and \
          event == "registro button registro" and \
          ventanaLogin is None:
